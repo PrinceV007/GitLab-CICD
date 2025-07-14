@@ -49,16 +49,14 @@ quality:
   only:
     - main
     - merge_requests
-
-
 scan:
   stage: scan
   image: aquasec/trivy:latest
   script:
-    - echo "🔍 Running Trivy vulnerability scans..."
-    - trivy image auth-service
-    - trivy image product-service
-    - trivy image cart-service
+    - echo "🔍 Scanning for vulnerabilities..."
+    - trivy image --no-progress auth-service
+    - trivy image --no-progress product-service
+    - trivy image --no-progress cart-service
   only:
     - main
     - merge_requests
