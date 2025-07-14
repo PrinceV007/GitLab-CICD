@@ -38,13 +38,14 @@ quality:
   stage: quality
   image: sonarsource/sonar-scanner-cli:latest
   script:
-    - echo "Running SonarCloud analysis..."
-    - sonar-scanner
-        -Dsonar.projectKey=nodejs-monorepo
+    - echo "📊 Running SonarCloud analysis..."
+    - sonar-scanner 
+        -Dsonar.projectKey=VibhavKhaneja_project
         -Dsonar.organization=vibhavkhaneja
         -Dsonar.sources=.
         -Dsonar.host.url=https://sonarcloud.io
         -Dsonar.login=$SONAR_TOKEN
+        -Dsonar.branch.name=main
   only:
     - main
     - merge_requests
