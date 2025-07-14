@@ -39,8 +39,7 @@ quality:
   image: sonarsource/sonar-scanner-cli:latest
   script:
     - echo "📊 Running SonarCloud analysis..."
-    - |
-      sonar-scanner 
+    - sonar-scanner 
         -Dsonar.projectKey=VibhavKhaneja_project
         -Dsonar.organization=vibhavkhaneja
         -Dsonar.sources=.
@@ -50,6 +49,7 @@ quality:
   only:
     - main
     - merge_requests
+
 
 scan:
   stage: scan
