@@ -55,14 +55,15 @@ scan:
   image: aquasec/trivy:latest
   script:
     - echo "🔍 Scanning auth-service for vulnerabilities..."
-    - trivy fs ./service-auth
+    - trivy fs service-auth
     - echo "🔍 Scanning product-service for vulnerabilities..."
-    - trivy fs ./service-product
+    - trivy fs service-product
     - echo "🔍 Scanning cart-service for vulnerabilities..."
-    - trivy fs ./service-cart
+    - trivy fs service-cart
   only:
     - main
     - merge_requests
+
 
 
 deploy:
