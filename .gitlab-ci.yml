@@ -54,25 +54,10 @@ scan:
   stage: scan
   image: aquasec/trivy:latest
   script:
-    - echo "🔍 Scanning auth-service for vulnerabilities..."
-    - trivy fs service-auth
-    - echo "🔍 Scanning product-service for vulnerabilities..."
-    - trivy fs service-product
-    - echo "🔍 Scanning cart-service for vulnerabilities..."
-    - trivy fs service-cart
+    - echo "🔍 Scanning Docker images for vulnerabilities..."
+    - trivy image auth-service
+    - trivy image product-service
+    - trivy image cart-service
   only:
     - main
     - merge_requests
-
-
-
-deploy:
-  stage: deploy
-  image: docker/compose:latest
-  services:
-    - docker:dind
-  script:
-    - echo "🚀 Deploying with Docker Compose..."
-    - docker-compose up -d --build
-  only:
-    - tags
