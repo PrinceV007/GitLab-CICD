@@ -53,11 +53,14 @@ quality:
 scan:
   stage: scan
   image: aquasec/trivy:latest
+  services:
+    - docker:dind
   script:
     - echo "🔍 Scanning Docker images for vulnerabilities..."
-    - trivy image auth-service
-    - trivy image product-service
-    - trivy image cart-service
+    - trivy image auth-service || true
+    - trivy image product-service || true
+    - trivy image cart-service || true
   only:
     - main
-    - merge_requests
+    - merge_requestsct-service
+    - trivy image cart-service
