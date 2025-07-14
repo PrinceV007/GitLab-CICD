@@ -14,7 +14,7 @@ build:
   services:
     - docker:dind
   script:
-    - echo "Building services..."
+    - echo "🔧 Building services..."
     - docker build -t auth-service ./service-auth
     - docker build -t product-service ./service-product
     - docker build -t cart-service ./service-cart
@@ -26,7 +26,7 @@ test:
   stage: test
   image: node:18
   script:
-    - echo "Running tests..."
+    - echo "🧪 Running tests..."
     - cd service-auth && npm install && npm test
     - cd ../service-product && npm install && npm test
     - cd ../service-cart && npm install && npm test
@@ -39,13 +39,26 @@ quality:
   image: sonarsource/sonar-scanner-cli:latest
   script:
     - echo "📊 Running SonarCloud analysis..."
-    - sonar-scanner 
+    - |
+      sonar-scanner 
         -Dsonar.projectKey=VibhavKhaneja_project
         -Dsonar.organization=vibhavkhaneja
         -Dsonar.sources=.
         -Dsonar.host.url=https://sonarcloud.io
         -Dsonar.login=$SONAR_TOKEN
         -Dsonar.branch.name=main
+  only:
+    - main
+    - merge_requests
+
+scan:
+  stage: scan
+  image: aquasec/trivy:latest
+  script:
+    - echo "🔍 Running Trivy vulnerability scans..."
+    - trivy image auth-service
+    - trivy image product-service
+    - trivy image cart-service
   only:
     - main
     - merge_requests
