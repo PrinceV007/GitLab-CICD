@@ -4,10 +4,13 @@
     "main": "index.js",
     "scripts": {
       "start": "node index.js",
-      "test": "echo \"No tests yet for cart-service\" && exit 0"
+      "test": "jest --coverage"
     },
     "dependencies": {
       "express": "^4.18.2"
+    },
+    "devDependencies": {
+      "jest": "^29.0.0"
     }
   }
   
