@@ -35,8 +35,6 @@ test:
       - service-auth/coverage/lcov.info
       - service-product/coverage/lcov.info
       - service-cart/coverage/lcov.info
-    reports:
-      cobertura: service-auth/coverage/cobertura-coverage.xml
     expire_in: 1 hour
   only:
     - main
