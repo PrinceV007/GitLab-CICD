@@ -2,9 +2,9 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-app.use(express.json()); // Replaces body-parser
+app.use(express.json());
 
-// In-memory user store (for learning only)
+// In-memory user store
 let users = [];
 
 // POST /register
@@ -21,7 +21,6 @@ app.post('/register', (req, res) => {
   }
 
   users.push({ username, password });
-  console.log(`[REGISTER] ${username} registered`);
   res.status(201).json({ message: 'User registered successfully' });
 });
 
@@ -35,11 +34,15 @@ app.post('/login', (req, res) => {
   }
 
   const token = jwt.sign({ username }, 'mysecretkey', { expiresIn: '1h' });
-  console.log(`[LOGIN] ${username} logged in`);
   res.json({ token });
 });
 
 // Health check
 app.get('/', (req, res) => res.send('Auth service is running'));
 
-app.listen(3001, () => console.log('Auth service on port 3001'));
+// Export for tests
+if (require.main === module) {
+  app.listen(3001, () => console.log('Auth service on port 3001'));
+} else {
+  module.exports = app;
+}
