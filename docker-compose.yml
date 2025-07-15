@@ -4,14 +4,14 @@ services:
   auth-service:
     build: ./service-auth
     ports:
-      - "5000:5000"
+      - "3001:3001"
 
   product-service:
     build: ./service-product
     ports:
-      - "5001:5001"
+      - "3002:3002"
 
   cart-service:
     build: ./service-cart
     ports:
-      - "5002:5002"
+      - "3003:3003"
