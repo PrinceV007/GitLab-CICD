@@ -71,10 +71,18 @@ scan:
     - docker build -t auth-service ./service-auth
     - docker build -t product-service ./service-product
     - docker build -t cart-service ./service-cart
-    - echo "🔍 Scanning images with Trivy..."
-    - trivy image auth-service
-    - trivy image product-service
-    - trivy image cart-service
+
+    - echo "🔍 Scanning images with Trivy (only HIGH/CRITICAL)..."
+    - trivy image --severity HIGH,CRITICAL --format json --output trivy-auth.json auth-service
+    - trivy image --severity HIGH,CRITICAL --format json --output trivy-product.json product-service
+    - trivy image --severity HIGH,CRITICAL --format json --output trivy-cart.json cart-service
+  artifacts:
+    paths:
+      - trivy-auth.json
+      - trivy-product.json
+      - trivy-cart.json
+    expire_in: 1 week
   only:
     - main
     - merge_requests
+
