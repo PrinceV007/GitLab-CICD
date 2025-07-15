@@ -26,10 +26,15 @@ test:
   stage: test
   image: node:18
   script:
-    - echo "🧪 Running tests..."
-    - cd service-auth && npm install && npm test
-    - cd ../service-product && npm install && npm test
-    - cd ../service-cart && npm install && npm test
+    - echo "Running tests..."
+    - cd service-auth && npm install && npm test -- --coverage && cd ..
+    - cd service-product && npm install && npm test -- --coverage && cd ..
+    - cd service-cart && npm install && npm test -- --coverage && cd ..
+  artifacts:
+    paths:
+      - service-auth/coverage/lcov.info
+      - service-product/coverage/lcov.info
+      - service-cart/coverage/lcov.info
   only:
     - main
     - merge_requests
