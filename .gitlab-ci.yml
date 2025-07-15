@@ -44,7 +44,7 @@ quality:
   stage: quality
   image: sonarsource/sonar-scanner-cli:latest
   script:
-    - echo "📊 Running SonarCloud analysis..."
+    - echo "Running SonarCloud analysis..."
     - sonar-scanner 
         -Dsonar.projectKey=VibhavKhaneja_project
         -Dsonar.organization=vibhavkhaneja
