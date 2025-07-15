@@ -1,17 +1,16 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-app.use(bodyParser.json());
+app.use(express.json()); // Replaces body-parser
 
-// In-memory user store (not for production use)
+// In-memory user store (for learning only)
 let users = [];
 
 // POST /register
 app.post('/register', (req, res) => {
   const { username, password } = req.body;
-  
+
   if (!username || !password) {
     return res.status(400).json({ message: 'Username and password are required' });
   }
@@ -22,6 +21,7 @@ app.post('/register', (req, res) => {
   }
 
   users.push({ username, password });
+  console.log(`[REGISTER] ${username} registered`);
   res.status(201).json({ message: 'User registered successfully' });
 });
 
@@ -35,6 +35,7 @@ app.post('/login', (req, res) => {
   }
 
   const token = jwt.sign({ username }, 'mysecretkey', { expiresIn: '1h' });
+  console.log(`[LOGIN] ${username} logged in`);
   res.json({ token });
 });
 
