@@ -53,12 +53,12 @@ test:
 quality:
   stage: quality
   image: sonarsource/sonar-scanner-cli:latest
-
   dependencies:
     - test
   script:
     - echo "Running SonarCloud analysis..."
     - ls -R coverage-artifacts/
+    - >
       sonar-scanner
       -Dsonar.projectKey=VibhavKhaneja_project
       -Dsonar.organization=vibhavkhaneja
@@ -72,7 +72,7 @@ quality:
   only:
     - main
     - merge_requests
-    
+
 scan:
   stage: scan
   image: docker:latest
