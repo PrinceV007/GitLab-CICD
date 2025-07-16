@@ -53,8 +53,13 @@ test:
 quality:
   stage: quality
   image: sonarsource/sonar-scanner-cli:latest
+  dependencies:
+    - test
   script:
-    - echo "Running SonarCloud analysis..."
+    - echo "📥 Using uploaded lcov files from test stage..."
+    - ls -R coverage-artifacts/
+
+    - echo "🚀 Running SonarCloud analysis..."
     - sonar-scanner 
         -Dsonar.projectKey=VibhavKhaneja_project
         -Dsonar.organization=vibhavkhaneja
@@ -62,6 +67,9 @@ quality:
         -Dsonar.host.url=https://sonarcloud.io
         -Dsonar.login=$SONAR_TOKEN
         -Dsonar.branch.name=main
+        -Dsonar.javascript.lcov.reportPaths=coverage-artifacts/lcov-auth.info,coverage-artifacts/lcov-product.info,coverage-artifacts/lcov-cart.info
+  artifacts:
+    when: always
   only:
     - main
     - merge_requests
