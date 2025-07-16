@@ -62,8 +62,11 @@ quality:
       sonar-scanner
       -Dsonar.projectKey=VibhavKhaneja_project
       -Dsonar.organization=vibhavkhaneja
-      -Dsonar.sources=service-auth,service-product,service-cart
+      -Dsonar.sources=service-auth,index.js,service-product,index.js,service-cart,index.js
+      -Dsonar.tests=service-auth/__tests__,service-product/__tests__,service-cart/__tests__
       -Dsonar.javascript.lcov.reportPaths=coverage-artifacts/lcov-auth.info,coverage-artifacts/lcov-product.info,coverage-artifacts/lcov-cart.info
+      -Dsonar.inclusions=**/*.js
+      -Dsonar.test.inclusions=**/__tests__/**/*.js
       -Dsonar.host.url=https://sonarcloud.io
       -Dsonar.login=$SONAR_TOKEN
       -Dsonar.branch.name=main
