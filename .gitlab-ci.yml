@@ -30,14 +30,22 @@ test:
     - cd service-auth && npm install && npm test -- --coverage && cd ..
     - cd service-product && npm install && npm test -- --coverage && cd ..
     - cd service-cart && npm install && npm test -- --coverage && cd ..
+
+    # ✅ Move coverage files to root-level folder so GitLab CI can upload
+    - mkdir -p coverage-artifacts
+    - cp service-auth/coverage/lcov.info coverage-artifacts/lcov-auth.info || echo "auth lcov not found"
+    - cp service-product/coverage/lcov.info coverage-artifacts/lcov-product.info || echo "product lcov not found"
+    - cp service-cart/coverage/lcov.info coverage-artifacts/lcov-cart.info || echo "cart lcov not found"
+
+    # Optional: Debug paths
+    - echo "📂 Final structure:"
+    - find . -name '*.info'
+  
   artifacts:
     paths:
-      - service-auth/coverage/lcov.info
-      - service-product/coverage/lcov.info
-      - service-cart/coverage/lcov.info
-      - echo "📂 Checking for lcov.info files:"
-      - find . -name lcov.info
+      - coverage-artifacts/
     expire_in: 1 hour
+
   only:
     - main
     - merge_requests
