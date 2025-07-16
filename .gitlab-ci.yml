@@ -35,6 +35,8 @@ test:
       - service-auth/coverage/lcov.info
       - service-product/coverage/lcov.info
       - service-cart/coverage/lcov.info
+      - echo "📂 Checking for lcov.info files:"
+      - find . -name lcov.info
     expire_in: 1 hour
   only:
     - main
