@@ -90,7 +90,7 @@ Run all services locally with Docker Compose:
 docker-compose up -d --build
 
 
-Feedback of Team Members: 
+##  Feedback of Team Members: 
 Bhavya Jain: Didnt respond to the main group/ channel which was created due to which there was no response from his side towards the project, contated me once on personal channel to learn how to operate on gitlab but didnt reply to any work related messages on the official channel.
 Productivity: Completed the documentation part of the project on the last day.
 
