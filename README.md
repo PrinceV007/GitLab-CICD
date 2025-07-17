@@ -1,22 +1,94 @@
-Introduction 
+# 🚀 GitLab CI/CD DevOps Project – Microservices Automation
+
+A DevOps automation project that implements CI/CD pipelines using **GitLab**, **Docker**, **SonarCloud**, and **Trivy** to manage and deploy a Node.js-based microservices application. The pipeline ensures automated builds, test coverage reporting, security scanning, and containerized deployment via Docker Compose.
 GitLab CI/CD for Microservices is a comprehensive DevOps project aimed at automating the development, testing, security analysis, and deployment of a Node.js-based microservices system. Built entirely on the GitLab platform, the pipeline uses a declarative .gitlab-ci.yml configuration to orchestrate builds, run unit tests with coverage, scan for vulnerabilities, and deploy services using Docker. This integration enables seamless delivery of code changes across multiple services, eliminating the need for manual workflows or third-party tools. 
 
-By leveraging industry-standard tools like Git, Docker, SonarCloud, Trivy, and Docker Compose, this project ensures that each microservice—auth, product, and cart—is continuously validated for quality and security. The system mirrors real-world DevOps practices, including artifact handling, secure token-based scanning, and staged pipeline execution. Designed for scalability and clarity, the solution demonstrates how modern CI/CD can enforce best practices and streamline multi-service deployments within a single, cohesive GitLab pipeline. 
+---
 
-Process Flow 
-The CI/CD pipeline follows a structured, multi-stage process designed to ensure automation, quality validation, and security across the entire microservices system. Each stage handles a specific function and passes relevant data using GitLab artifacts. The five core stages are: 
+## 🧑‍💻 Team Members
 
-Build: In the build stage, Docker images are constructed for each microservice (auth, product, and cart) using docker build. This guarantees consistent and isolated environments for subsequent testing, scanning, and deployment. By containerizing each service early in the pipeline, the project ensures reproducibility and alignment with real-world cloud deployment practices. 
+- **Vibhav Khaneja** (Lead)
+- Vansh Gupta
+- Bhavya Jain
 
-Test: The test stage executes unit tests for each service using Jest, with the --coverage flag enabled. This generates lcov.info files that contain detailed line-by-line test coverage data. These files are collected into a shared coverage-artifacts directory and uploaded as GitLab artifacts, making them available for use in the next stage (quality analysis). 
+---
 
-Quality: In the quality stage, the SonarCloud scanner processes the coverage reports generated earlier. The scanner connects securely via the SONAR_TOKEN and reads all lcov.info files passed from the test stage. The results are displayed in the SonarCloud dashboard, with the project achieving a combined test coverage of 22.32%. This validates that the pipeline correctly collects, transfers, and analyzes test coverage across services. 
+## 📁 Microservices Repository
 
-Scan: The scan stage focuses on container security. It uses Trivy to analyze the built Docker images of all services, specifically targeting HIGH and CRITICAL vulnerabilities. The scan outputs are saved in JSON format and uploaded as artifacts. For example, the cart-service scan identified 265 vulnerabilities, including 9 critical, helping highlight areas for future security improvements before deployment. 
+Services included:
 
-Deploy: In the deploy stage, all microservices are brought online using docker-compose up -d --build. This automatically starts auth-service, product-service, and cart-service on ports 3001, 3002, and 3003 respectively. The use of Docker Compose simplifies local deployment and enables quick end-to-end testing of all services in an isolated, production-like environment. 
+- `auth-service`
+- `product-service`
+- `cart-service`
+
+---
+
+## 🎯 Objective
+
+To build a secure and automated CI/CD pipeline for a multi-service Node.js application using GitLab CI/CD, while integrating:
+
+- Code quality checks (SonarCloud)
+- Security scanning (Trivy)
+- Test coverage tracking (Jest + lcov)
+- Docker-based microservice architecture
+- Docker Compose-based deployment
+
+---
+
+## ⚙️ Tools & Technologies Used
+
+| Category      | Tools/Tech                                  |
+|---------------|----------------------------------------------|
+| CI/CD         | GitLab CI/CD, `.gitlab-ci.yml`               |
+| Containerization | Docker, Docker Compose                    |
+| Testing       | Jest, Supertest                              |
+| Code Quality  | SonarCloud                                   |
+| Security      | Trivy                                        |
+| SCM           | Git, GitHub, GitLab                          |
+| Scripting     | Shell commands in CI jobs                    |
+
+---
+
+## 🧱 Pipeline Structure
+
+The `.gitlab-ci.yml` defines 5 key stages:
+
+1. **Build** – Docker builds for each service
+2. **Test** – Run unit tests using Jest with coverage reporting
+3. **Quality** – SonarCloud analysis for code quality & coverage
+4. **Scan** – Trivy scan for HIGH/CRITICAL vulnerabilities in images
+5. **Deploy** – Local deployment using Docker Compose (ports: 3001–3003)
+
+![NodeJS Diagram](./images/Nodejs_diagram.png)
 
 
+---
+
+## 📊 SonarCloud Summary
+
+Test coverage and code quality is tracked through SonarCloud. For this project:
+
+- Overall test coverage reported: **22.32%**
+- Quality gate status enforced in CI pipeline
+- `lcov.info` reports from each service passed as artifacts between stages
+
+---
+
+## 🔐 Security Scanning
+
+Each Docker image is scanned with **Trivy**, and critical vulnerabilities are logged:
+
+- Results saved as JSON artifacts in GitLab CI
+- Example: `cart-service` scan shows 9 critical, 256 high vulnerabilities
+
+---
+
+## 🧪 Local Deployment
+
+Run all services locally with Docker Compose:
+
+```bash
+docker-compose up -d --build
 
 
 Feedback of Team Members: 
