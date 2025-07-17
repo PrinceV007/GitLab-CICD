@@ -1,93 +1,27 @@
-# Project
+Introduction 
+GitLab CI/CD for Microservices is a comprehensive DevOps project aimed at automating the development, testing, security analysis, and deployment of a Node.js-based microservices system. Built entirely on the GitLab platform, the pipeline uses a declarative .gitlab-ci.yml configuration to orchestrate builds, run unit tests with coverage, scan for vulnerabilities, and deploy services using Docker. This integration enables seamless delivery of code changes across multiple services, eliminating the need for manual workflows or third-party tools. 
+
+By leveraging industry-standard tools like Git, Docker, SonarCloud, Trivy, and Docker Compose, this project ensures that each microservice—auth, product, and cart—is continuously validated for quality and security. The system mirrors real-world DevOps practices, including artifact handling, secure token-based scanning, and staged pipeline execution. Designed for scalability and clarity, the solution demonstrates how modern CI/CD can enforce best practices and streamline multi-service deployments within a single, cohesive GitLab pipeline. 
+
+Process Flow 
+The CI/CD pipeline follows a structured, multi-stage process designed to ensure automation, quality validation, and security across the entire microservices system. Each stage handles a specific function and passes relevant data using GitLab artifacts. The five core stages are: 
+
+Build: In the build stage, Docker images are constructed for each microservice (auth, product, and cart) using docker build. This guarantees consistent and isolated environments for subsequent testing, scanning, and deployment. By containerizing each service early in the pipeline, the project ensures reproducibility and alignment with real-world cloud deployment practices. 
+
+Test: The test stage executes unit tests for each service using Jest, with the --coverage flag enabled. This generates lcov.info files that contain detailed line-by-line test coverage data. These files are collected into a shared coverage-artifacts directory and uploaded as GitLab artifacts, making them available for use in the next stage (quality analysis). 
+
+Quality: In the quality stage, the SonarCloud scanner processes the coverage reports generated earlier. The scanner connects securely via the SONAR_TOKEN and reads all lcov.info files passed from the test stage. The results are displayed in the SonarCloud dashboard, with the project achieving a combined test coverage of 22.32%. This validates that the pipeline correctly collects, transfers, and analyzes test coverage across services. 
+
+Scan: The scan stage focuses on container security. It uses Trivy to analyze the built Docker images of all services, specifically targeting HIGH and CRITICAL vulnerabilities. The scan outputs are saved in JSON format and uploaded as artifacts. For example, the cart-service scan identified 265 vulnerabilities, including 9 critical, helping highlight areas for future security improvements before deployment. 
+
+Deploy: In the deploy stage, all microservices are brought online using docker-compose up -d --build. This automatically starts auth-service, product-service, and cart-service on ports 3001, 3002, and 3003 respectively. The use of Docker Compose simplifies local deployment and enables quick end-to-end testing of all services in an isolated, production-like environment. 
 
 
 
-## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Feedback of Team Members: 
+Bhavya Jain: Didnt respond to the main group/ channel which was created due to which there was no response from his side towards the project, contated me once on personal channel to learn how to operate on gitlab but didnt reply to any work related messages on the official channel.
+Productivity: Completed the documentation part of the project on the last day.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/VibhavKhaneja/project.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/VibhavKhaneja/project/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Vansh Gupta: Didnt respond to the main group/ channel which was created due to which there was no response from his side towards the project, didnt even contaced me on personal channel so there was 0 collaboration during the implementation process/ phase of the project.
+Productivity: Completed the ppt of the project on the last day
