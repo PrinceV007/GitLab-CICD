@@ -76,12 +76,6 @@ Each Docker image is scanned with **Trivy**, and critical vulnerabilities are lo
 
 ## 🧪 Local Deployment
 
-Run all services locally with Docker Compose:
+- Run all services locally with Docker Compose:
+- docker-compose up -d --build
 
-```bash
-docker-compose up -d --build
-
-
-Vansh Gupta: Didnt respond to the main group/ channel which was created due to which there was no response from his side towards the project,
-didnt even contaced me on personal channel so there was 0 collaboration during the implementation process/ phase of the project.
-Productivity: Completed the ppt of the project on the last day
