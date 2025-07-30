@@ -51,7 +51,7 @@ The `.gitlab-ci.yml` defines 5 key stages:
 4. **Scan** – Trivy scan for HIGH/CRITICAL vulnerabilities in images
 5. **Deploy** – Local deployment using Docker Compose (ports: 3001–3003)
 
-![NodeJS Architecture](./Nodejs_diagram.png)
+![NodeJS Architecture](./Nodejs.draw.io.png)
 
 ---
 
