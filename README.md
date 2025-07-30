@@ -5,14 +5,6 @@ GitLab CI/CD for Microservices is a comprehensive DevOps project aimed at automa
 
 ---
 
-## 🧑‍💻 Team Members
-
-- **Vibhav Khaneja** (Lead)
-- Vansh Gupta
-- Bhavya Jain
-
----
-
 ## 📁 Microservices Repository
 
 Services included:
@@ -89,11 +81,6 @@ Run all services locally with Docker Compose:
 ```bash
 docker-compose up -d --build
 
-
-##  Feedback of Team Members: 
-Bhavya Jain: Didnt respond to the main group/ channel which was created due to which there was no response from his side towards the project,
-contated me once on personal channel to learn how to operate on gitlab but didnt reply to any work related messages on the official channel.
-Productivity: Completed the documentation part of the project on the last day.
 
 Vansh Gupta: Didnt respond to the main group/ channel which was created due to which there was no response from his side towards the project,
 didnt even contaced me on personal channel so there was 0 collaboration during the implementation process/ phase of the project.
